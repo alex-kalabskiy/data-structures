@@ -30,9 +30,9 @@ public class StackClient {
         StackClient client = new StackClient();
 //        System.out.println("Testing stack implemetation: " + stackImplementation);
 //        System.out.println("Creating stack");
+        long startTime = System.currentTimeMillis();
         StackI<Animal> animalStack = client.getAnimalStack(amountOfObjects, stackImplementation);
 //        System.out.println("Sorting started");
-        long startTime = System.currentTimeMillis();
         animalStack = client.sortAnimals(animalStack, stackImplementation);
         long finishTime = System.currentTimeMillis();
         System.out.println("amount:" + amountOfObjects + ", implementation: " + stackImplementation +
