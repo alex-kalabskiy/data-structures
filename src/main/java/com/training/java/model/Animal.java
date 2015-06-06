@@ -33,6 +33,12 @@ public abstract class Animal implements Comparable<Animal> {
 
     @Override
     public int compareTo(Animal o) {
-        return 0;
+        if (!this.getType().equals(o.getType())) {
+            return this.getType().compareTo(o.getType());
+        } else if (!this.getSpecies().equals(o.getSpecies())) {
+            return this.getSpecies().compareTo(o.getSpecies());
+        } else {
+            return this.getName().compareTo(o.getName());
+        }
     }
 }

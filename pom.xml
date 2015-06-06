@@ -35,7 +35,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.training.java.structures.stack.StackClient</mainClass>
+                            <mainClass>com.training.java.structures.ClientTester</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

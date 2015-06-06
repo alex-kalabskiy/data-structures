@@ -3,6 +3,7 @@ package com.training.java.structures.queue;
 import com.training.java.model.Animal;
 import com.training.java.model.AnimalFactory;
 import com.training.java.model.AnimalType;
+import com.training.java.structures.DataStructureClient;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -11,29 +12,42 @@ import java.util.Queue;
  *
  * Created by Alex on 23.05.2015.
  */
-public class QueueClient {
-    private static final int START_AMOUNT = 100;
+public class QueueClient implements DataStructureClient{
+    private final int startAmount;
+    private final int finishAmount;
+    private final int stepAmount;
     private AnimalFactory animalFactory = new AnimalFactory();
 
-    public static void main(String[] args) {
-        for (int amount = START_AMOUNT;  amount <= 100; amount*=10) {
-            testPerformanceForAmount(amount);
-        }
-
+    public QueueClient(int startAmount, int finishAmount, int stepAmount) {
+        this.startAmount = startAmount;
+        this.finishAmount = finishAmount;
+        this.stepAmount = stepAmount;
     }
 
-    private static void testPerformanceForAmount(int amount) {
-        QueueClient client = new QueueClient();
+    @Override
+    public void test() {
+        for (int amount = startAmount;  amount <= finishAmount; amount*=stepAmount) {
+            testPerformanceForAmount(amount);
+
+        }
+    }
+
+    private void testPerformanceForAmount(int amount) {
         long startTime = System.currentTimeMillis();
-        Queue<Animal> queue = client.createQueue(amount);
+        Queue<Animal> queue = createQueue(amount);
         long finishTime = System.currentTimeMillis();
-        System.out.println("amount:" + amount + ", time:" + ((finishTime - startTime) * 1.0 / 1000) + " seconds");
-        client.showElements(queue);
+        System.out.println(queue.getClass().getName() + ";" + amount + ";" +
+                ((finishTime - startTime) * 1.0 / 1000));
+
+        //        client.showElements(queue);
     }
 
     private void showElements(Queue<Animal> queue) {
-        for (Animal animal : queue) {
-            animal.whoAmI();
+        if (queue == null) {
+            return;
+        }
+        for (;!queue.isEmpty(); ) {
+            queue.poll().whoAmI();
         }
     }
 

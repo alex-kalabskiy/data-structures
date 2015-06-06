@@ -1,1 +1,0 @@
-java -cp .data-structures-1.0-SNAPSHOT.jar com.training.java.structures.stack.StackClient
