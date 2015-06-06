@@ -2,6 +2,7 @@ package com.training.java.structures.stack;
 
 import com.training.java.model.*;
 import com.training.java.service.Predicate;
+import com.training.java.structures.DataStructureClient;
 
 import static com.training.java.model.Animal.ANIMAL_NAMES;
 import static com.training.java.model.AnimalType.BIRD;
@@ -12,31 +13,40 @@ import static com.training.java.model.AnimalType.MAMMAL;
  *
  * Created by Alex on 14.03.15.
  */
-public class StackClient {
+public class StackClient implements DataStructureClient {
 
-    public static final int AMOUNT = 100;
+    public  final int startAmount;
+    public  final int finishAmount;
+    public  final int stepAmount;
     private AnimalFactory animalFactory = new AnimalFactory();
-    private StackFactory stackFactory = new StackFactory();
+    private StackFactory<Animal> stackFactory = new StackFactory<>();
 
-    public static void main(String[] args) {
-        for (int amount = AMOUNT; amount <= 10000000; amount*=10){
+    public StackClient(int startAmount, int finishAmount, int stepAmount) {
+        this.startAmount = startAmount;
+        this.finishAmount = finishAmount;
+        this.stepAmount = stepAmount;
+    }
+
+
+    @Override
+    public void test()  {
+        for (int amount = this.startAmount; amount <= finishAmount; amount*=stepAmount){
             testStackImplementation(amount, StackFactory.LINKED_STACK);
             testStackImplementation(amount, StackFactory.ARRAY_STACK);
             System.out.println("----------------------------------");
         }
     }
 
-    private static void testStackImplementation(int amountOfObjects, String stackImplementation) {
-        StackClient client = new StackClient();
+    private void testStackImplementation(int amountOfObjects, String stackImplementation) {
 //        System.out.println("Testing stack implemetation: " + stackImplementation);
 //        System.out.println("Creating stack");
-        StackI<Animal> animalStack = client.getAnimalStack(amountOfObjects, stackImplementation);
-//        System.out.println("Sorting started");
         long startTime = System.currentTimeMillis();
-        animalStack = client.sortAnimals(animalStack, stackImplementation);
+        StackI<Animal> animalStack = getAnimalStack(amountOfObjects, stackImplementation);
+//        System.out.println("Sorting started");
+        animalStack = sortAnimals(animalStack, stackImplementation);
         long finishTime = System.currentTimeMillis();
-        System.out.println("amount:" + amountOfObjects + ", implementation: " + stackImplementation +
-                ", time:" + ((finishTime - startTime) * 1.0 / 1000) + " seconds");
+        System.out.println(stackImplementation + ";" + amountOfObjects + ";" +
+                ((finishTime - startTime) * 1.0 / 1000));
 //        client.showElements(animalStack);
     }
 
@@ -63,11 +73,11 @@ public class StackClient {
     private StackI<Animal> sortAnimalsBySpecies(StackI<Animal> animalStack,
                                                 AnimalType animalType,
                                                 String stackImplementation) {
-        String[] species = animalType.getSpecies();
+        String[] animalTypeSpecies = animalType.getSpecies();
 
         StackI<Animal> resultStack = stackFactory.createStack(stackImplementation, animalStack.size());
-        for (int i = 0; i < species.length; i++) {
-            StackI<Animal> sortedBySpeciesStack = getAllBySpecies(animalStack, species[i]);
+        for (String species : animalTypeSpecies) {
+            StackI<Animal> sortedBySpeciesStack = getAllBySpecies(animalStack, species);
             sortedBySpeciesStack = sortAnimalsByNames(sortedBySpeciesStack, stackImplementation);
             resultStack.pushAll(sortedBySpeciesStack);
         }
@@ -76,8 +86,8 @@ public class StackClient {
 
     private StackI<Animal> sortAnimalsByNames(StackI<Animal> animalStack, String stackImplementation) {
         StackI<Animal> resultStack = stackFactory.createStack(stackImplementation, animalStack.size());
-        for (int i = 0; i < ANIMAL_NAMES.length; i++) {
-            StackI<Animal> sortedByNameStack = getAllByName(animalStack, ANIMAL_NAMES[i]);
+        for (String ANIMAL_NAME : ANIMAL_NAMES) {
+            StackI<Animal> sortedByNameStack = getAllByName(animalStack, ANIMAL_NAME);
             resultStack.pushAll(sortedByNameStack);
         }
         return resultStack;

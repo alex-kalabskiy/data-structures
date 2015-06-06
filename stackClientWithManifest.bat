@@ -1,1 +1,0 @@
-java -jar .\target\data-structures-1.2-SNAPSHOT.jar

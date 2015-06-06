@@ -1,5 +1,7 @@
 package com.training.java.model;
 
+import java.util.Random;
+
 import static com.training.java.model.Bird.BIRD_SPECIES;
 import static com.training.java.model.Mammal.MAMMAL_SPECIES;
 
@@ -12,6 +14,7 @@ public enum AnimalType {
     BIRD(BIRD_SPECIES);
 
     public final String[] species;
+   
 
     AnimalType(String[] species) {
         this.species = species;
@@ -23,5 +26,12 @@ public enum AnimalType {
 
     public boolean isEqualType(Animal animal) {
         return this.equals(animal.getType());
+    }
+
+    public static AnimalType getRandomAnimalType() {
+        int number = new Random().nextInt(AnimalType.values().length);
+
+
+        return AnimalType.values()[number];
     }
 }
