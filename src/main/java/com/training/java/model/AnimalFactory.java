@@ -19,8 +19,9 @@ import static com.training.java.model.AnimalType.MAMMAL;
 public class AnimalFactory {
     private final Random random = new Random();
 
-    public Animal getAnimal(AnimalType animalType) {
+    public Animal getAnimal() {
         Animal animal;
+        AnimalType animalType = AnimalType.getRandomAnimalType();
 
         switch (animalType) {
             case BIRD:

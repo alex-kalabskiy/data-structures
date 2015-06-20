@@ -124,8 +124,7 @@ public class StackClient implements DataStructureClient {
     private StackI<Animal> getAnimalStack(int numberOfAnimals, String stackImplementation) {
         StackI<Animal> animalStack = stackFactory.createStack(stackImplementation, numberOfAnimals);
         for (int a = 1; a <= numberOfAnimals; a++) {
-            AnimalType animalType = resolveAnimalType(a);
-            Animal animal = animalFactory.getAnimal(animalType);
+            Animal animal = animalFactory.getAnimal();
             animalStack.push(animal);
         }
         return animalStack;

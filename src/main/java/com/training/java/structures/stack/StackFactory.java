@@ -12,20 +12,20 @@ public class StackFactory<T> {
 
     public StackI<T> createStack(String stackType) {
         if (LINKED_STACK.equals(stackType)) {
-            return new LinkedStack<T>();
+            return new LinkedStack<>();
         }
         else if (ARRAY_STACK.equals(stackType)) {
-            return new ArrayStack<T>();
+            return new ArrayStack<>();
         }
         throw new IllegalArgumentException("Not supported stack type: " + stackType);
     }
 
     public StackI<T> createStack(String stackType, int capacity) {
         if (LINKED_STACK.equals(stackType)) {
-            return new LinkedStack<T>();
+            return new LinkedStack<>();
         }
         else if (ARRAY_STACK.equals(stackType)) {
-            return new ArrayStack<T>(capacity);
+            return new ArrayStack<>(capacity);
         }
         throw new IllegalArgumentException("Not supported stack type: " + stackType);
     }

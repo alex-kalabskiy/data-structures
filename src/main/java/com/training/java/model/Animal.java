@@ -23,7 +23,7 @@ public abstract class Animal implements Comparable<Animal> {
         return species;
     }
 
-    public abstract String iCanDo();
+    protected abstract String iCanDo();
 
     public abstract AnimalType getType();
 

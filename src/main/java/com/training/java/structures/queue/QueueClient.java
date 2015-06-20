@@ -55,7 +55,7 @@ public class QueueClient implements DataStructureClient{
         Queue<Animal> queue = new PriorityQueue<>(amount);
         for (int i = 1; i <= amount; i++) {
             AnimalType animalType = AnimalType.getRandomAnimalType();
-            Animal animal = animalFactory.getAnimal(animalType);
+            Animal animal = animalFactory.getAnimal();
             queue.offer(animal);
         }
         return queue;
