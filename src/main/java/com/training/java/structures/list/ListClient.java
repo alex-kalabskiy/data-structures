@@ -2,18 +2,20 @@ package com.training.java.structures.list;
 
 import com.training.java.model.Animal;
 import com.training.java.model.AnimalFactory;
+import com.training.java.structures.Clients;
 import com.training.java.structures.DataStructureClient;
 
-import javax.xml.datatype.Duration;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
+import static com.training.java.structures.Clients.*;
+
 /**
+ *
  * Created by Alex on 13.06.2015.
  */
 public class ListClient implements DataStructureClient {
+
     private final int startAmount;
     private final int finishAmount;
     private final int stepAmount;
@@ -29,14 +31,11 @@ public class ListClient implements DataStructureClient {
     @Override
     public void test() {
 
-
         for (int amount = startAmount; amount <= finishAmount; amount *= stepAmount) {
             testPerformanceForAmountAndImplementation(amount, ListFactory.ARRAY_LIST);
             testPerformanceForAmountAndImplementation(amount, ListFactory.LINKED_LIST);
             testPerformanceForAmountAndImplementation(amount, ListFactory.VECTOR_LIST);
-
         }
-
     }
 
     private void testPerformanceForAmountAndImplementation(int amount, String listType) {
@@ -53,8 +52,7 @@ public class ListClient implements DataStructureClient {
         assert (list.size() == amount);
         long startTime = System.currentTimeMillis();
         Collections.sort(list);
-        printResult(listType, amount, startTime, "sortList");
-
+        printResult(listType, amount, startTime, OPERATION_SORT);
     }
 
     private void readByIterator(int amount, String listType, List<Animal> list) {
@@ -63,7 +61,7 @@ public class ListClient implements DataStructureClient {
         for (Animal animal : list) {
             checkAnimal(animal);
         }
-        printResult(listType, amount, startTime, "readByIterator");
+        printResult(listType, amount, startTime, OPERATION_READ_BY_ITERATOR);
     }
 
     private void readByIndex(int amount, String listType, List<Animal> list) {
@@ -72,7 +70,7 @@ public class ListClient implements DataStructureClient {
         for (int i = 0; i < amount; i++) {
             checkAnimal(list.get(i));
         }
-        printResult(listType, amount, startTime, "readByIndex");
+        printResult(listType, amount, startTime, OPERATION_READ_BY_INDEX);
 
     }
 
@@ -87,12 +85,6 @@ public class ListClient implements DataStructureClient {
             Animal animal = animalFactory.getAnimal();
             list.add(animal);
         }
-        printResult(listType, amount, startTime, "write");
-    }
-
-    private void printResult(String listType, int amount, long startTime, String operation) {
-        long finishTime = System.currentTimeMillis();
-        double duration = (finishTime - startTime) * 1.0 / 1000;
-        System.out.printf("%s ; %d ; %10.8f ; %s \n", listType, amount, duration, operation);
+        printResult(listType, amount, startTime, OPERATION_WRITE);
     }
 }

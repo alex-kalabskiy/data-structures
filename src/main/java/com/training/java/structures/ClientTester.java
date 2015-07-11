@@ -2,6 +2,7 @@ package com.training.java.structures;
 
 import com.training.java.structures.list.ListClient;
 import com.training.java.structures.queue.QueueClient;
+import com.training.java.structures.set.SetClient;
 import com.training.java.structures.stack.LinkedStack;
 import com.training.java.structures.stack.StackClient;
 import com.training.java.structures.stack.StackI;
@@ -24,6 +25,7 @@ public class ClientTester {
                 .withDataStructureClient(new StackClient(START_AMOUNT, FINISH_AMOUNT, STEP_AMOUNT))
                 .withDataStructureClient(new QueueClient(START_AMOUNT, FINISH_AMOUNT, STEP_AMOUNT))
                 .withDataStructureClient(new ListClient(START_AMOUNT, FINISH_AMOUNT, STEP_AMOUNT))
+                .withDataStructureClient(new SetClient(START_AMOUNT, FINISH_AMOUNT, STEP_AMOUNT))
                 .build();
 
         System.out.println("Data Structure; Amount; Duration; Operation");

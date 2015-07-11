@@ -15,7 +15,6 @@ public enum AnimalType {
 
     public final String[] species;
    
-
     AnimalType(String[] species) {
         this.species = species;
     }
@@ -30,7 +29,6 @@ public enum AnimalType {
 
     public static AnimalType getRandomAnimalType() {
         int number = new Random().nextInt(AnimalType.values().length);
-
 
         return AnimalType.values()[number];
     }

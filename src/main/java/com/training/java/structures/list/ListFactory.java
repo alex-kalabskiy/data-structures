@@ -15,7 +15,7 @@ public class ListFactory<T> {
     public static final String ARRAY_LIST = "array";
     public static final String VECTOR_LIST = "vector";
 
-    public <T> List<T> createList(String listType) {
+    public List<T> createList(String listType) {
         if (LINKED_LIST.equals(listType)) {
             return new LinkedList<>();
         } else if (ARRAY_LIST.equals(listType)) {
